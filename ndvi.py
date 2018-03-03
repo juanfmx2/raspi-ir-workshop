@@ -75,23 +75,23 @@ def run():
 
                 # Bottom of fraction
                 bottom = (r.astype(float) + b.astype(float))
-                bottom[bottom == 0] = 0.01  # Make sure we don't divide by zero!
+                bottom[bottom == 0] = 0.0001  # Make sure we don't divide by zero!
 
-                ndvi = (r.astype(float) - b) / bottom
+                ndvi = (r.astype(float) - b.astype(float)) / bottom
                 ndvi = contrast_stretch(ndvi)
                 ndvi = ndvi.astype(np.uint8)
 
                 # Do the labelling
-                label(b, 'Blue')
-                label(g, 'Green')
-                label(r, 'NIR')
-                label(ndvi, 'NDVI')
+                # label(b, 'Blue')
+                # label(g, 'Green')
+                # label(r, 'NIR')
+                # label(ndvi, 'NDVI')
 
                 # Combine ready for display
-                combined = disp_multiple(b, g, r, ndvi)
+                # combined = disp_multiple(b, g, r, ndvi)
 
                 # Display
-                cv2.imshow('image', combined)
+                cv2.imshow('image', ndvi)
 
                 stream.truncate(0)
 
